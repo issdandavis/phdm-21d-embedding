@@ -45,6 +45,42 @@ vector = embedder.encode("Book a flight from SFO to NYC")
 # Returns: 21D numpy array in Poincare Ball coordinates
 ```
 
+## Dataset Setup (PowerShell)
+
+Use this repo as a working directory for Hugging Face datasets:
+
+```powershell
+cd C:\Users\issda\hf-repos\phdm-21d-embedding
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements-datasets.txt
+```
+
+Set your token in the current shell session:
+
+```powershell
+$env:HF_TOKEN="hf_your_token_here"
+```
+
+Load and preview a dataset split:
+
+```powershell
+python scripts/load_hf_dataset.py --dataset-id issdandavis/scbe-aethermoore-knowledge-base --split train --limit 3
+```
+
+Push local JSONL files to a dataset repo:
+
+```powershell
+python scripts/push_jsonl_dataset.py --dataset-id issdandavis/scbe-aethermoore-knowledge-base --train .\data\train.jsonl --validation .\data\validation.jsonl
+```
+
+Expected JSONL row format example:
+
+```json
+{"text":"Example source content","source":"notion","category":"policy"}
+```
+
 ## Related
 
 - [SCBE-AETHERMOORE GitHub](https://github.com/issdandavis/SCBE-AETHERMOORE)
