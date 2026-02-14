@@ -75,10 +75,23 @@ Push local JSONL files to a dataset repo:
 python scripts/push_jsonl_dataset.py --dataset-id issdandavis/scbe-aethermoore-knowledge-base --train .\data\train.jsonl --validation .\data\validation.jsonl
 ```
 
+Convert Perplexity/Markdown exports into JSONL splits:
+
+```powershell
+python scripts/markdown_to_jsonl.py --input-dir C:\path\to\perplexity-export --output-dir .\data --train-ratio 0.9 --validation-ratio 0.1
+```
+
+One-shot flow (convert then push):
+
+```powershell
+python scripts/markdown_to_jsonl.py --input-dir C:\path\to\perplexity-export --output-dir .\data
+python scripts/push_jsonl_dataset.py --dataset-id issdandavis/your-central-knowledge-base --train .\data\train.jsonl --validation .\data\validation.jsonl --test .\data\test.jsonl
+```
+
 Expected JSONL row format example:
 
 ```json
-{"text":"Example source content","source":"notion","category":"policy"}
+{"id":"6e4fcd3f34f5b021","source":"perplexity_space_export","space":"SCBE GitHub Deployment","relative_path":"SCBE GitHub Deployment/notes.md","title":"Deployment Notes","text":"Example source content","meta":{"author":"issdandavis"}}
 ```
 
 ## Related
